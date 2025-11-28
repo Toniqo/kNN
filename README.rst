@@ -34,10 +34,10 @@ kNN
 ===
 
 
-    Add a short description here!
+    kNN classifier
 
 
-A longer description of your project goes here...
+Project implementing kNN classifier for Python class
 
 
 .. _pyscaffold-notes:
