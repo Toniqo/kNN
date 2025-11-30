@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from sklearn.datasets import load_iris
+from sklearn.datasets import load_iris, load_digits
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from sklearn.neighbors import KNeighborsClassifier
@@ -9,12 +9,14 @@ from knn.abdo_knn import ABDOKNNClassifier
 
 
 def main():
-    iris = load_iris()
-    X = iris.data
-    y = iris.target
+    data = load_digits()
+    # data = load_iris()
+    X = data.data
+    y = data.target
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42, stratify=y)
 
+    # Our implementation wants python lists instead of numpy array
     X_train_list = X_train.tolist()
     X_test_list = X_test.tolist()
     y_train_list = y_train.tolist()
