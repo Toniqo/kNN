@@ -4,14 +4,14 @@ from knn.abdo_knn import ABDOKNNClassifier
 
 from sklearn.datasets import load_iris, load_digits
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, confusion_matrix
+from sklearn.metrics import accuracy_score, confusion_matrix, ConfusionMatrixDisplay
 from sklearn.neighbors import KNeighborsClassifier
 
 import matplotlib.pyplot as plt
 
 
 def main():
-    data = load_digits()
+    data = load_iris()
     X = data.data
     y = data.target
 
@@ -26,7 +26,7 @@ def main():
     acc_skl = []
 
     # k = 1-16
-    ks = list(range(1, 16))
+    ks = list(range(1, 17))
 
     for k in ks:
         abdo_knn = ABDOKNNClassifier(k=k)
@@ -42,41 +42,38 @@ def main():
     plt.figure()
     plt.plot(ks, acc_skl, marker='s', label="KNeighborsClassifier (scikit-learn)")
     plt.plot(ks, acc_abdo, marker='o', label="ABDO kNN")
+    plt.title("Accuracy over k")
     plt.xlabel("k (neighbors)")
     plt.ylabel("Accuracy")
-    plt.title("Accuracy over k")
     plt.grid(True)
     plt.legend()
     plt.tight_layout()
     plt.show()
 
-    k_plt = 5
-    abdo = ABDOKNNClassifier(k=k_plt)
-    abdo.fit(X_train, y_train)
-    y_pred_abdo = abdo.predict(X_test)
+    for k_plt in range(2, 9, 3):
+        abdo = ABDOKNNClassifier(k=k_plt)
+        abdo.fit(X_train, y_train)
+        y_pred_abdo = abdo.predict(X_test)
 
-    skl = KNeighborsClassifier(n_neighbors=k_plt)
-    skl.fit(X_train, y_train)
-    y_pred_skl = skl.predict(X_test)
+        skl = KNeighborsClassifier(n_neighbors=k_plt)
+        skl.fit(X_train, y_train)
+        y_pred_skl = skl.predict(X_test)
 
-    cm_abdo = confusion_matrix(y_test, y_pred_abdo)
-    cm_skl = confusion_matrix(y_test, y_pred_skl)
+        cm_abdo = confusion_matrix(y_test, y_pred_abdo)
+        cm_skl = confusion_matrix(y_test, y_pred_skl)
 
-    fig, axes = plt.subplots(1, 2, figsize=(8, 4), constrained_layout=True)
+        fig, axes = plt.subplots(1, 2, figsize=(8, 4), constrained_layout=True)
+        fig.suptitle("Confusion matrix: ABDO kNN vs scikit-learn kNN")
 
-    im0 = axes[0].imshow(cm_abdo)
-    axes[0].set_title(f"ABDO kNN, k={k_plt}")
-    axes[0].set_xlabel("Predicted class")
-    axes[0].set_ylabel("True class")
+        im0 = ConfusionMatrixDisplay(cm_abdo)
+        im0.plot(ax=axes[0], cmap="inferno", colorbar=False)
+        axes[0].set_title(f"ABDO kNN, k={k_plt}")
 
-    im1 = axes[1].imshow(cm_skl)
-    axes[1].set_title(f"scikit-learn KNN, k={k_plt}")
-    axes[1].set_xlabel("Predicted class")
-    axes[1].set_ylabel("True class")
+        im1 = ConfusionMatrixDisplay(cm_skl)
+        im1.plot(ax=axes[1], cmap="inferno", colorbar=True)
+        axes[1].set_title(f"ABDO kNN, k={k_plt}")
 
-    fig.colorbar(im0, ax=axes.ravel())
-    fig.suptitle("Confusion matrix: ABDO kNN vs scikit-learn kNN")
-    plt.show()
+        plt.show()
 
 if __name__ == "__main__":
     main()
