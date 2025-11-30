@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 
 
 def main():
-    data = load_iris()
+    data = load_digits()
     X = data.data
     y = data.target
 
@@ -71,7 +71,7 @@ def main():
 
         im1 = ConfusionMatrixDisplay(cm_skl)
         im1.plot(ax=axes[1], cmap="inferno", colorbar=True)
-        axes[1].set_title(f"ABDO kNN, k={k_plt}")
+        axes[1].set_title(f"KNeighborsClassifier (scikit-learn), k={k_plt}")
 
         plt.show()
 
