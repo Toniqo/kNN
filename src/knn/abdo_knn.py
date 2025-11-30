@@ -4,7 +4,7 @@ from collections import Counter
 from math import sqrt
 
 
-class SimpleKNNClassifier:
+class ABDOKNNClassifier:
     def __init__(self, k: int = 3):
         if k <= 0:
             raise ValueError("k must be greater than 0")
