@@ -39,10 +39,14 @@ kNN
 This project presents a Python implementation of the k-Nearest Neighbors (k-NN) classifier and a comparison with the "KNeighborsClassifier" from scikit-learn.
 
 The main goals of the project are:
-- understanding the k-NN algorithm,
-- comparing classification quality (accuracy),
-- comparing execution time,
-- visualizing results (plots and confusion matrices).
+
+1. understanding the k-NN algorithm,
+
+2. comparing classification quality (accuracy),
+
+3. comparing execution time,
+
+4. visualizing results (plots and confusion matrices).
 
 
 .. _pyscaffold-notes:
