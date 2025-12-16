@@ -158,6 +158,9 @@ Tools used
 - scikit-learn
 - matplotlib
 
+--------------------------------------------------
+
+Documentation can be found in docs folder, named **Antoni_Bajor_kNN_documentation.pdf**
 
 .. _pyscaffold-notes:
 
