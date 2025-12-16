@@ -33,9 +33,6 @@
 kNN
 ===
 
-
-    kNN classifier
-
 This project presents a Python implementation of the k-Nearest Neighbors (k-NN) classifier and a comparison with the "KNeighborsClassifier" from scikit-learn.
 
 The main goals of the project are:
@@ -47,6 +44,119 @@ The main goals of the project are:
 3. comparing execution time,
 
 4. visualizing results (plots and confusion matrices).
+
+
+k-NN Classifier - Custom implementation vs scikit-learn
+=============================================
+
+This project presents a **pure Python implementation of the k-Nearest Neighbors (k-NN) classifier**
+and compares it with the reference implementation from **scikit-learn**.
+
+The main goal is to understand how k-NN works internally and to compare:
+
+1. classification accuracy,
+2. behavior for different values of *k*,
+3. execution time
+
+The project follows a **PyScaffold-style structure**.
+
+--------------------------------------------------
+
+Project Structure
+-----------------
+
+::
+
+    src/knn/
+        abdo_knn.py        Custom Python implementation of k-NN
+    tests/
+        compare_knn.py     Accuracy and execution time comparison
+        plot_knn_results.py  Accuracy plots and confusion matrices
+
+--------------------------------------------------
+
+Implemented Classifier
+----------------------
+
+**ABDO KNN Classifier** (`ABDOKNNClassifier`) is implemented in pure Python:
+
+- Euclidean distance computation,
+- manual distance sorting,
+- majority voting using ``Counter``,
+- support for multi-class classification,
+- no NumPy used inside the algorithm logic.
+
+--------------------------------------------------
+
+Reference Implementation
+------------------------
+
+For comparison, the project uses:
+
+- ``KNeighborsClassifier`` from **scikit-learn**
+
+This implementation is highly optimized and serves as a performance and accuracy reference.
+
+--------------------------------------------------
+
+Datasets
+--------
+
+Experiments are performed using datasets from ``sklearn.datasets``:
+
+- Iris
+- Digits
+
+--------------------------------------------------
+
+Experiments and Visualization
+-----------------------------
+
+The project includes:
+
+- accuracy comparison for *k = 1 … 16*,
+- accuracy vs *k* plots,
+- confusion matrices shown side by side,
+- execution time comparison for both classifiers.
+
+Visualization is done using **matplotlib** and **scikit-learn metrics**.
+
+--------------------------------------------------
+
+How to Run
+----------
+
+Run accuracy and timing comparison:
+
+::
+
+    python tests/compare_knn.py
+
+Generate plots and confusion matrices:
+
+::
+
+    python tests/plot_knn_results.py
+
+--------------------------------------------------
+
+Typical Results
+---------------
+
+- Both classifiers achieve similar accuracy.
+- The scikit-learn implementation is **significantly faster**.
+- Larger values of *k* improve stability but may reduce sensitivity.
+
+--------------------------------------------------
+
+Tools used
+-----------------
+
+- Python 3
+- PyScaffold
+- VirtualEnv
+- scikit-learn
+- matplotlib
 
 
 .. _pyscaffold-notes:
